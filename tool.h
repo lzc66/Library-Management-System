@@ -40,6 +40,8 @@ int checkBookInquiryInput(char str[],BOOK book);
 
 void paintBookData(int start,int BookClass,int row,BOOK book[]);
 
+void getNext(char pattern[], int next[]);
+
 int checkChildStr(char str[],char userStr[]);
 
 int checkUserInquiryInput(char str[],USER user);

@@ -397,12 +397,66 @@ int checkBookInquiryInput(char str[],BOOK book)
 	return NOT_SATISFY;
 }
 
+void getNext(char pattern[], int next[]) 
+{
+    int patternLen = strlen(pattern);
+    int i = 1, j = 0;
+    next[0] = 0;
+    while (i < patternLen) 
+	{
+        if (pattern[i] == pattern[j]) 
+		{
+            j++;
+            next[i] = j;
+            i++;
+        } 
+		else 
+		{
+            if (j > 0)
+			{
+                j = next[j - 1];
+            } 
+			else
+			{
+                next[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
+
 int checkChildStr(char str[],char userStr[])
 {
-	if(strstr(userStr,str))
+	    int i = 0;
+		int j=0;
+	int textLen = strlen(userStr);
+    int patternLen = strlen(str);
+    int next[100];
+    getNext(str, next);
+
+    while (i < textLen && j < patternLen) 
 	{
-		return IS_CHILD;
-	}
+        if (userStr[i] == str[j])
+		{
+            i++;
+            j++;
+        } 
+		else
+		{
+            if (j > 0)
+			{
+                j = next[j - 1];
+            }
+			else
+			{
+                i++;
+            }
+        }
+    }
+    if (j == patternLen) {
+        return IS_CHILD;
+    }
     return NOT_CHILD;
 }
 
@@ -413,7 +467,7 @@ void paintBookData(int start,int BookClass,int row,BOOK book[])
 	{
 		if(start<BookClass)
 		{
-			gotoxy(14,row+(i+1)*2);
+			gotoxy(13,row+(i+1)*2);
 			printf("%s",book[start].isbn);
 			gotoxy(26,row+(i+1)*2);
 			printf("%s",book[start].title);
@@ -458,7 +512,7 @@ int checkUserInquiryInput(char str[],USER user)
 
 void paintUserData(int start,int UserCount,int row,USER user[])
 {
-		int i=0;
+	int i=0;
 	for(i=0;i<4;i++)   //每一页只有四条记录
 	{
 		if(start<UserCount)

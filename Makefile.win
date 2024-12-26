@@ -1,22 +1,23 @@
 # Project: Library
-# Makefile created by Dev-C++ 5.11
+# Makefile created by Dev-C++ 5.4.0
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = data.o main.o tool.o view.o
-LINKOBJ  = data.o main.o tool.o view.o
-LIBS     = -L"D:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"D:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32
-INCS     = -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
-CXXINCS  = -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+OBJ      = data.o main.o tool.o view.o $(RES)
+LINKOBJ  = data.o main.o tool.o view.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"%path%/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"%path%/MinGW64/x86_64-w64-mingw32/include" -I"%path%/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"%path%/MinGW64/x86_64-w64-mingw32/include" -I"%path%/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"%path%/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = Library.exe
-CXXFLAGS = $(CXXINCS) -D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS
-CFLAGS   = $(INCS) -D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS
-RM       = rm.exe -f
+CXXFLAGS = $(CXXINCS) -D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS -g3
+CFLAGS   = $(INCS) -D__GNUWIN32__ -W -DWIN32 -DNDEBUG -D_CONSOLE -D_MBCS -g3
+RM       = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
 
 all: all-before $(BIN) all-after
+
 
 clean: clean-custom
 	${RM} $(OBJ) $(BIN)
