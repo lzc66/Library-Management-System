@@ -182,6 +182,8 @@ extern char userNames[MAX_USER_COUNT][50];
 extern int userIndexes[MAX_USER_COUNT];
 extern int bookBorrowCount[MAX_BOOKS];
 extern 	int shelfIndex;
+extern int dist[MAX_SHELVES];
+extern int	prev[MAX_SHELVES];
 
 #endif
  

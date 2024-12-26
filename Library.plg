@@ -6,13 +6,7 @@
 --------------------Configuration: Library - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSPBBA8.tmp" with contents
-[
-/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Library.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\lx1\vc\1\Library\tool.c"
-]
-Creating command line "cl.exe @C:\Users\Lenovo\AppData\Local\Temp\RSPBBA8.tmp" 
-Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSPBBA9.tmp" with contents
+Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSP1960.tmp" with contents
 [
 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Library.pdb" /debug /machine:I386 /out:"Debug/Library.exe" /pdbtype:sept 
 .\Debug\data.obj
@@ -20,14 +14,8 @@ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32
 .\Debug\tool.obj
 .\Debug\view.obj
 ]
-Creating command line "link.exe @C:\Users\Lenovo\AppData\Local\Temp\RSPBBA9.tmp"
+Creating command line "link.exe @C:\Users\Lenovo\AppData\Local\Temp\RSP1960.tmp"
 <h3>Output Window</h3>
-Compiling...
-tool.c
-D:\lx1\vc\1\Library\tool.c(666) : warning C4244: '=' : conversion from 'double ' to 'float ', possible loss of data
-D:\lx1\vc\1\Library\tool.c(840) : warning C4133: '=' : incompatible types - from 'struct EdgeNode *' to 'struct EdgeNode *'
-D:\lx1\vc\1\Library\tool.c(845) : warning C4133: '=' : incompatible types - from 'struct EdgeNode *' to 'struct EdgeNode *'
-D:\lx1\vc\1\Library\tool.c(891) : warning C4133: '=' : incompatible types - from 'struct EdgeNode *' to 'struct EdgeNode *'
 Linking...
 
 

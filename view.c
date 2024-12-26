@@ -18,6 +18,8 @@ int bookBorrowCount[MAX_BOOKS]={0};
 Shelf shelves[MAX_SHELVES]={0};
 AdjList libraryGraph; 
 int shelfIndex= 0;
+int dist[MAX_SHELVES];
+int	prev[MAX_SHELVES];
 
 int title()//主界面
 {
@@ -1599,8 +1601,7 @@ int navigate_normal()
 {
 	char strTime[50];
 	int i=0;
-	int dist[MAX_SHELVES];
-	int	prev[MAX_SHELVES];
+	
     int startShelf;
 	int targetShelf; 
 	int shelfCount;
@@ -1613,7 +1614,6 @@ int navigate_normal()
 	printf("欢迎%s,%s              日期:%s\n",loginingUser.userName,strRole,strTime);
 	gotoxy(10,10);
 	BuildTree();
-	initLibraryGraph();
 	shelfCount = countNodes(root);
 	shelfIndex=0;
 	printf("存在书架:0~%d",shelfCount-1);
