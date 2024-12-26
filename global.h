@@ -168,10 +168,8 @@ typedef struct
 } AdjList[MAX_SHELVES];
 
 // ¥Ê¥¢À˘”– Èº‹
-Shelf shelves[MAX_SHELVES];
-AdjList libraryGraph; 
-
-
+extern Shelf shelves[MAX_SHELVES];
+extern AdjList libraryGraph; 
 extern USER loginingUser;
 extern USERLINK*userLink;
 extern BOOK books[MAX_BOOKS];
@@ -183,6 +181,7 @@ extern int userIndexes[MAX_USER_COUNT];
 extern char userNames[MAX_USER_COUNT][50];
 extern int userIndexes[MAX_USER_COUNT];
 extern int bookBorrowCount[MAX_BOOKS];
+extern 	int shelfIndex;
 
 #endif
  

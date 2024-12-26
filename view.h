@@ -50,7 +50,9 @@ int book_class(int model);
 
 int book_recommend(int model);
 
-int navigate(int model);
+int navigate_admin();
+
+int navigate_normal();
 
 int show_digital(int model);
 

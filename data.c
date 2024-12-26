@@ -80,7 +80,7 @@ void initBookData(char*fileName)
 		i++;
 	}
 	fclose(fp);
-	quickSort(books,0,i-1,0);
+	
 }
 
 int addBookToFile(char*fileName,BOOK newBook)
@@ -136,3 +136,4 @@ int addHistoryToFile(char*fileName,BorrowHistory history)
 	fclose(fp);
 	return 0;
 }
+

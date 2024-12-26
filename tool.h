@@ -100,6 +100,8 @@ void quickSortForCount(int* arr, int* indexArr, int low, int high);
 
 void bookIndexAfterReorder(BorrowHistoryStack stack);
 
-void userIndexAfterReorder(BorrowHistoryStack stack,char userNames[MAX_USER_COUNT][50]); 
+void userIndexAfterReorder(BorrowHistoryStack stack,char userNames[MAX_USER_COUNT][50]);
+
+int countNodes(CategoryNode* root) ; 
 
 #endif

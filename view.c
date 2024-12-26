@@ -15,6 +15,9 @@ int userIndexes[MAX_USER_COUNT];
 char userNames[MAX_USER_COUNT][50];
 int userIndexes[MAX_USER_COUNT];
 int bookBorrowCount[MAX_BOOKS]={0};
+Shelf shelves[MAX_SHELVES]={0};
+AdjList libraryGraph; 
+int shelfIndex= 0;
 
 int title()//主界面
 {
@@ -72,7 +75,7 @@ int login()//登录界面
         gotoxy(10,20);
         printf("提示:按回车登录验证，ESC返回\n");
         gotoxy(19,10);
-		result = getUserInput(login_user.userName,1,10,1,1);
+		result = getUserInput(login_user.userName,1,10,1,3);
 		strcpy(loginingUser.userName,login_user.userName);
 		if(result==INPUT_ESC)
 		{
@@ -154,10 +157,13 @@ int regist()//注册界面
         gotoxy(10,22);
         printf("角色:   ");
         paintWindow(19,21,15,3);
-        gotoxy(10,25);
+		gotoxy(10,25);
+		printf("角色1:管理员,角色2:普通用户");
+        gotoxy(10,28);
         printf("提示:按回车登录验证，ESC返回\n");
+
         gotoxy(21,10);
-        result = getUserInput(reg_user.userName,4,8,1,1);
+        result = getUserInput(reg_user.userName,1,10,1,3);
 
 		if(result==INPUT_ESC)
 		{
@@ -183,7 +189,7 @@ int regist()//注册界面
 		{
 			return SHOW_MAIN_WIN;
 		}	
-		gotoxy(10,28);
+		gotoxy(10,31);
 		if(strcmp(configPwd,reg_user.passwd)!=0)
 		{
 			printf("两次密码输入不一致，按任意键重新!");
@@ -221,7 +227,7 @@ int admin_win()//管理员界面
     paintButton(19,13,21,3,"2-用户管理");
     paintButton(19,16,21,3,"3-借阅管理");
     paintButton(19,19,21,3,"4-图书分类和推荐");
-    paintButton(19,22,21,3,"5-图书馆布局和导航");
+    paintButton(19,22,21,3,"5-图书馆布局管理");
 	paintButton(19,25,21,3,"6-图书数据图");
     paintButton(19,28,21,3,"7-修改密码");
     paintButton(19,31,21,3,"8-退出");
@@ -660,13 +666,14 @@ for(i=0;i<sizeof(books)/sizeof(BOOK);i++)
 	{
 		count =getBookClass();
 		books[i] = newBook;
-		addBookToFile("./data/book.dat",newBook);
-		rebuildFile("./data/book.dat",books,count,sizeof(BOOK));
+		quickSort(books,0,i,0);
+		rebuildFile("./data/book.dat",books,i+1,sizeof(BOOK));
 		initBookData("./data/book.dat");
 		break;
 	}
 }
     gotoxy(10,29);
+	BuildTree();
     printf("图书添加成功!\n");
     Sleep(1000);
     return SHOW_WIN_BOOK;
@@ -1007,62 +1014,71 @@ int bookBorrow()
 	bookClass=getBookClass();
     printf("请输入借阅图书的索引（0~%d）: ", bookClass - 1);
     scanf("%d", &bookIndex);
-		
-    if (bookIndex >= 0 && bookIndex < bookClass)
-	{			gotoxy(9,17);
-                enqueueBorrowRequest(bookIndex, userName);
-                if (borrowQueue.front == borrowQueue.rear) 
-				{
-					 printf("没有待处理的借阅请求！\n");
-					return SHOW_WIN_NORMAL_MAIN;
-				}
-				result =  dequeueBorrowRequest() ;
-				if(result == REQUEST_FALSE)
-				{
-					request.bookIndex=-1;
-				}
-				else
-				{
-					borrowQueue.front =(borrowQueue.front+1)%MAX_QUEUE_SIZE;
-					request =borrowQueue.requests[borrowQueue.front];
-				}
-				if (request.bookIndex == -1) 
-				{
-					getch();
-					return SHOW_WIN_NORMAL_MAIN; // 队列为空
-				}
-				if (books[request.bookIndex].count == 0)
-				{
+	if(strcmp(loginingUser.userName,userName)==0)
+	{
+		if (bookIndex >= 0 && bookIndex < bookClass)
+		{			gotoxy(9,17);
+					enqueueBorrowRequest(bookIndex, userName);
+					if (borrowQueue.front == borrowQueue.rear) 
+					{
+						 printf("没有待处理的借阅请求！\n");
+						return SHOW_WIN_NORMAL_MAIN;
+					}
+					result =  dequeueBorrowRequest() ;
+					if(result == REQUEST_FALSE)
+					{
+						request.bookIndex=-1;
+					}
+					else
+					{
+						borrowQueue.front =(borrowQueue.front+1)%MAX_QUEUE_SIZE;
+						request =borrowQueue.requests[borrowQueue.front];
+					}
+					if (request.bookIndex == -1) 
+					{
+						getch();
+						return SHOW_WIN_NORMAL_MAIN; // 队列为空
+					}
+					if (books[request.bookIndex].count == 0)
+					{
+						gotoxy(9,19);
+						printf("图书《%s》目前不可借，借阅失败！\n", books[request.bookIndex].title);
+						getch();
+						return SHOW_WIN_BOOK_BORROW;
+					}
+					books[request.bookIndex].count--; // 标记为不可借
 					gotoxy(9,19);
-					printf("图书《%s》目前不可借，借阅失败！\n", books[request.bookIndex].title);
+					printf("用户:%s成功借阅图书《%s》！\n", request.userName, books[request.bookIndex].title);
+					rebuildFile("./data/book.dat",books,bookClass,sizeof(BOOK));
+					initBookData("./data/book.dat");
+					// 记录借阅历史
+					history.bookIndex = request.bookIndex;
+					strcpy(history.userName,request.userName);
+					strcpy(history.borrowTime,request.borrowTime);
+					strcpy(history.returnTime,"");
+					strcpy(history.category,request.category);
+					history.lateFee = 0;
+					borrowHistoryStack.history[++borrowHistoryStack.top] = history;
+					addHistoryToFile("./data/history.dat",history);
+					initHistoryData("./data/history.dat");
 					getch();
-					return SHOW_WIN_BOOK_BORROW;
-				}
-				books[request.bookIndex].count--; // 标记为不可借
-				gotoxy(9,19);
-				printf("用户:%s成功借阅图书《%s》！\n", request.userName, books[request.bookIndex].title);
-				rebuildFile("./data/book.dat",books,bookClass,sizeof(BOOK));
-				initBookData("./data/book.dat");
-				// 记录借阅历史
-				history.bookIndex = request.bookIndex;
-				strcpy(history.userName,request.userName);
-				strcpy(history.borrowTime,request.borrowTime);
-				strcpy(history.returnTime,"");
-				strcpy(history.category,request.category);
-				history.lateFee = 0;
-				borrowHistoryStack.history[++borrowHistoryStack.top] = history;
-				addHistoryToFile("./data/history.dat",history);
-				initHistoryData("./data/history.dat");
-				getch();
-				return SHOW_WIN_NORMAL_MAIN;
-     }
-     else 
-	 {
-				gotoxy(10,17);
-                printf("无效的图书索引！\n");
-				getch();
-				return SHOW_WIN_NORMAL_MAIN;
-     }
+					return SHOW_WIN_NORMAL_MAIN;
+		 }
+		 else 
+		 {
+					gotoxy(10,17);
+					printf("无效的图书索引！\n");
+					getch();
+					return SHOW_WIN_NORMAL_MAIN;
+		 }
+	}
+	else
+	{
+		gotoxy(10,17);
+		printf("用户名不匹配!\n");
+		getch();
+		return SHOW_WIN_NORMAL_MAIN;
+	}
 }
 
 int bookReturn()
@@ -1092,33 +1108,43 @@ int bookReturn()
 	bookClass=getBookClass();
     printf("请输入归还图书的索引（0~%d）: ", bookClass - 1);
     scanf("%d", &bookIndex);
-	if (bookIndex < 0 && bookIndex >= bookClass)
+	if(strcmp(loginingUser.userName,userName)==0)
 	{
-		getch();
-		gotoxy(10,16);
-        printf("无效的图书索引！\n");
-        return SHOW_WIN_NORMAL_MAIN;
-    }
-    // 更新借阅历史栈
-    for (i = borrowHistoryStack.top; i >= 0; i--)
-	{
-        if (borrowHistoryStack.history[i].bookIndex == bookIndex && strcmp(borrowHistoryStack.history[i].returnTime,"")==0 && strcmp(borrowHistoryStack.history[i].userName,userName)==0) 
+		if (bookIndex < 0 && bookIndex >= bookClass)
 		{
-            strcpy(borrowHistoryStack.history[i].returnTime,strTime); // 设置归还时间
-            borrowHistoryStack.history[i].lateFee = calculateLateFee(borrowHistoryStack.history[i].borrowTime); // 计算罚款
-			gotoxy(10,16);
-            printf("图书《%s》归还成功！超期罚款：%.2f 元\n", books[bookIndex].title, borrowHistoryStack.history[i].lateFee);
-			books[bookIndex].count++;
-			rebuildFile("./data/book.dat",books,bookClass,sizeof(BOOK));
-			dataUpdate("./data/history.dat",&borrowHistoryStack.history[i],sizeof(BorrowHistory)*i,sizeof(BorrowHistory));
 			getch();
-            return SHOW_WIN_NORMAL_MAIN;
-        }
-    }
-	gotoxy(10,16);
-	printf("未查询到借阅历史，或已归还成功!");
-	getch();
-	return SHOW_WIN_NORMAL_MAIN;
+			gotoxy(10,16);
+			printf("无效的图书索引！\n");
+			return SHOW_WIN_NORMAL_MAIN;
+		}
+		// 更新借阅历史栈
+		for (i = borrowHistoryStack.top; i >= 0; i--)
+		{
+			if (borrowHistoryStack.history[i].bookIndex == bookIndex && strcmp(borrowHistoryStack.history[i].returnTime,"")==0 && strcmp(borrowHistoryStack.history[i].userName,userName)==0) 
+			{
+				strcpy(borrowHistoryStack.history[i].returnTime,strTime); // 设置归还时间
+				borrowHistoryStack.history[i].lateFee = calculateLateFee(borrowHistoryStack.history[i].borrowTime); // 计算罚款
+				gotoxy(10,16);
+				printf("图书《%s》归还成功！超期罚款：%.2f 元\n", books[bookIndex].title, borrowHistoryStack.history[i].lateFee);
+				books[bookIndex].count++;
+				rebuildFile("./data/book.dat",books,bookClass,sizeof(BOOK));
+				dataUpdate("./data/history.dat",&borrowHistoryStack.history[i],sizeof(BorrowHistory)*i,sizeof(BorrowHistory));
+				getch();
+				return SHOW_WIN_NORMAL_MAIN;
+			}
+		}
+		gotoxy(10,16);
+		printf("未查询到借阅历史，或已归还成功!");
+		getch();
+		return SHOW_WIN_NORMAL_MAIN;
+	}	
+	else
+	{
+		gotoxy(10,17);
+		printf("用户名不匹配!\n");
+		getch();
+		return SHOW_WIN_NORMAL_MAIN;
+	}
 }
 
 int renewBook()
@@ -1289,7 +1315,7 @@ int book_class_and_recommend(int model)
 	char strTime[50];
 	int i=0;
 	system("cls");
-    paintWindow(5,5,49,26);
+    paintWindow(5,5,55,26);
     gotoxy(21,7);
     printf("图书分类和推荐界面");
     gotoxy(10,8);
@@ -1412,6 +1438,18 @@ int book_class(int model)
 					bookData[count]=findTree->books[i];
 					count++;
 				}
+				if(strcmp(info,"")==0)
+				{
+					for(i=0;i<sizeof(books)/sizeof(BOOK);i++)
+					{
+					if(strcmp(books[i].author,"")==0)
+					{
+						break;
+					}
+					bookData[count]=books[i];
+					count++;
+					}
+				}
 			if(count==0)
 			{
 					gotoxy(32,24);
@@ -1490,7 +1528,7 @@ int book_recommend(int model)
 	char strTime[50];
 	int i=0;
 	system("cls");
-    paintWindow(5,5,49,26);
+    paintWindow(5,5,55,26);
     gotoxy(21,7);
     printf("图书推荐界面");
     gotoxy(10,8);
@@ -1514,7 +1552,7 @@ int book_recommend(int model)
 	}
 }
 
-int navigate(int model)
+int navigate_admin()
 {
 	char strTime[50];
 	int i=0;
@@ -1522,6 +1560,50 @@ int navigate(int model)
 	int	prev[MAX_SHELVES];
     int startShelf;
 	int targetShelf; 
+	int dis;
+	int shelfCount;
+	system("cls");
+    paintWindow(5,5,62,26);
+    gotoxy(25,7);
+    printf("图书布局管理界面");
+    gotoxy(10,8);
+	getSystemTime(strTime,SHOW_SYS_DATE);
+	printf("欢迎%s,%s              日期:%s\n",loginingUser.userName,strRole,strTime);
+	gotoxy(10,10);
+	BuildTree();
+	shelfCount = countNodes(root);
+	shelfIndex=0;
+	printf("存在书架:0~%d",shelfCount-1);
+	gotoxy(10,13);
+	printf("请输入起始书架:");
+	scanf("%d",&startShelf);
+	gotoxy(10,15);
+	printf("请输入终点书架:");
+	scanf("%d",&targetShelf);
+    gotoxy(10,17);
+	printf("请输入距离:");
+	scanf("%d",&dis);
+	addEdge(startShelf, targetShelf,dis);
+	if(startShelf>=shelfCount||startShelf<0||targetShelf>=shelfCount||targetShelf<0)
+	{
+		gotoxy(10,19);
+		printf("书架不存在!");
+	}
+	gotoxy(10,21);
+	printf("按任意键返回!");
+	getch();
+		return SHOW_WIN_ADMIN_MAIN;
+}
+
+int navigate_normal()
+{
+	char strTime[50];
+	int i=0;
+	int dist[MAX_SHELVES];
+	int	prev[MAX_SHELVES];
+    int startShelf;
+	int targetShelf; 
+	int shelfCount;
 	system("cls");
     paintWindow(5,5,62,26);
     gotoxy(25,7);
@@ -1529,14 +1611,19 @@ int navigate(int model)
     gotoxy(10,8);
 	getSystemTime(strTime,SHOW_SYS_DATE);
 	printf("欢迎%s,%s              日期:%s\n",loginingUser.userName,strRole,strTime);
+	gotoxy(10,10);
+	BuildTree();
+	initLibraryGraph();
+	shelfCount = countNodes(root);
+	shelfIndex=0;
+	printf("存在书架:0~%d",shelfCount-1);
 	gotoxy(10,13);
 	printf("请输入你所在书架:");
 	scanf("%d",&startShelf);
 	gotoxy(10,15);
 	printf("请输入你想去的书架:");
 	scanf("%d",&targetShelf);
-	initShelves();
-    initLibraryGraph();
+    
     // 计算最短路径
     dijkstra(startShelf, dist, prev);
     // 检查目标书架是否可达
@@ -1557,14 +1644,7 @@ int navigate(int model)
         printf("\n");
     }
 	getch();
-	if(model==SHOW_WIN_NAVIGATE_ADMIN)
-	{
-		return SHOW_WIN_ADMIN_MAIN;
-	}
-	else if(model==SHOW_WIN_NAVIGATE_NORMAL)
-	{
 		return SHOW_WIN_NORMAL_MAIN;
-	}
 }
 
 int show_digital(int model)
@@ -1597,7 +1677,7 @@ int show_digital(int model)
 			break;
 		}
 		printf("     ║  No:%d  书名:%s 借阅量:%d\n",i+1,books[bookIndexes[i]].title,bookBorrowCount[i]);
-		paintExcel(40,17+(i*4),(bookBorrowCount[i]+1)*2,3,1,1);
+		paintExcel(40,17+(i*4),(bookBorrowCount[i]+1),3,1,1);
 	}
 	
 	

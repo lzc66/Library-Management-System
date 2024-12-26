@@ -658,7 +658,7 @@ void paintBookClassData(int start,int BookClass,int row,BOOK book[])
 		{
 			gotoxy(14,row+(i+1)*2);
 			printf("%s",book[start].category);
-			gotoxy(26,row+(i+1)*2);
+			gotoxy(25,row+(i+1)*2);
 			printf("%s",book[start].isbn);
 			gotoxy(38,row+(i+1)*2);
 			printf("%s",book[start].title);
@@ -696,8 +696,8 @@ CategoryNode* insertCategory(CategoryNode* root, const char* category)
 	 {
         root->right = insertCategory(root->right, category);
     }
-
-    return root;
+		
+	return root;
 }
 
 // 将图书添加到对应类别中
@@ -773,28 +773,6 @@ void BuildTree()
 	}
 }
 
-//初始化书架（范例，融入项目时请根据实际情况修改）
-void initShelves()
- {
-    strcpy(shelves[0].category, "Computer Science");
-    shelves[0].id = 0;
-
-    strcpy(shelves[1].category, "Literature");
-    shelves[1].id = 1;
-
-    strcpy(shelves[2].category, "History");
-    shelves[2].id = 2;
-
-    strcpy(shelves[3].category, "Mathematics");
-    shelves[3].id = 3;
-
-	strcpy(shelves[4].category, "Art");
-    shelves[4].id = 4;
-
-    // 更多书架可以继续初始化
-}
-
-
 //初始化图
 
 //添加边的函数（u,v为边的两个顶点）
@@ -807,7 +785,6 @@ void addEdge(int u, int v, int weight)
     edge1->weight = weight;
     edge1->next = libraryGraph[u].head;
     libraryGraph[u].head = edge1;
-
     edge2 = (EdgeNode*)malloc(sizeof(EdgeNode));
     edge2->dest = u;
     edge2->weight = weight;
@@ -823,16 +800,6 @@ void initLibraryGraph()
 	{
         libraryGraph[i].head = NULL;
     }
-
-    // 假设书架0和书架1之间有距离5的通道，书架1和书架2之间有距离2的通道
-    addEdge(0, 1, 5);
-    addEdge(1, 2, 2);
-    addEdge(0, 3, 7);
-    addEdge(2, 3, 3);
-	addEdge(0, 4, 4);
-    addEdge(1, 4, 6);
-    addEdge(2, 4, 8);
-    addEdge(3, 4, 1);
     // 更多的书架连接可以继续添加
 }
 
@@ -1046,3 +1013,26 @@ void userIndexAfterReorder(BorrowHistoryStack stack,char userNames[MAX_USER_COUN
     //对借阅量快排时同时操作索引数组
     quickSortForCount(userBorrowCount, userIndexes, 0, MAX_USER_COUNT - 1);
 }
+
+int countNodes(CategoryNode* root) 
+{
+	int rightCount=0;
+	int leftCount=0;
+	if(root!=NULL)
+	{
+		strcpy(shelves[shelfIndex].category,root->category);
+		shelves[shelfIndex].id=shelfIndex;
+		shelfIndex++;
+	}
+    if (root == NULL) 
+	{
+        return 0;
+    }
+    // 递归计算左子树节点数
+    leftCount = countNodes(root->left);
+    // 递归计算右子树节点数
+    rightCount = countNodes(root->right);
+    // 整棵树的节点数 = 左子树节点数 + 右子树节点数 + 1（根节点）
+    return leftCount+rightCount+1;
+}
+

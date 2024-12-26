@@ -6,13 +6,13 @@
 --------------------Configuration: Library - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSPEC30.tmp" with contents
+Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSP117B.tmp" with contents
 [
 /nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Library.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
 "D:\lx1\vc\1\Library\view.c"
 ]
-Creating command line "cl.exe @C:\Users\Lenovo\AppData\Local\Temp\RSPEC30.tmp" 
-Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSPEC31.tmp" with contents
+Creating command line "cl.exe @C:\Users\Lenovo\AppData\Local\Temp\RSP117B.tmp" 
+Creating temporary file "C:\Users\Lenovo\AppData\Local\Temp\RSP117C.tmp" with contents
 [
 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Library.pdb" /debug /machine:I386 /out:"Debug/Library.exe" /pdbtype:sept 
 .\Debug\data.obj
@@ -20,73 +20,75 @@ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32
 .\Debug\tool.obj
 .\Debug\view.obj
 ]
-Creating command line "link.exe @C:\Users\Lenovo\AppData\Local\Temp\RSPEC31.tmp"
+Creating command line "link.exe @C:\Users\Lenovo\AppData\Local\Temp\RSP117C.tmp"
 <h3>Output Window</h3>
 Compiling...
 view.c
-D:\lx1\vc\1\Library\view.c(24) : warning C4013: 'paintWindow' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(25) : warning C4013: 'gotoxy' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(27) : warning C4013: 'paintButton' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(64) : warning C4013: 'getSystemTime' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(75) : warning C4013: 'getUserInput' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(88) : warning C4013: 'checkLogin' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(92) : warning C4013: 'getch' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(193) : warning C4013: 'regUser' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(133) : warning C4101: 'fp' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(477) : warning C4013: 'checkPwd' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(493) : warning C4013: 'changePwd' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(419) : warning C4101: 'i' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(526) : warning C4013: 'getAllBookCount' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(564) : warning C4013: 'dataUpdate' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(565) : warning C4013: 'initBookData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(661) : warning C4013: 'getBookClass' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(663) : warning C4013: 'addBookToFile' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(664) : warning C4013: 'rebuildFile' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(718) : warning C4013: 'getBookIndex' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(756) : warning C4013: 'paintExcel' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(785) : warning C4013: 'checkBookInquiryInput' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(808) : warning C4013: 'paintBookData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(745) : warning C4101: 'a' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(909) : warning C4013: 'checkUserInquiryInput' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(932) : warning C4013: 'paintUserData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1013) : warning C4013: 'enqueueBorrowRequest' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1019) : warning C4013: 'dequeueBorrowRequest' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1054) : warning C4013: 'addHistoryToFile' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1055) : warning C4013: 'initHistoryData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(989) : warning C4101: 'count' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(987) : warning C4101: 'i' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(988) : warning C4101: 'j' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1108) : warning C4013: 'calculateLateFee' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1108) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
-D:\lx1\vc\1\Library\view.c(1072) : warning C4101: 'result' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1080) : warning C4101: 'history' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1075) : warning C4101: 'count' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1074) : warning C4101: 'j' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1164) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
-D:\lx1\vc\1\Library\view.c(1128) : warning C4101: 'result' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1136) : warning C4101: 'history' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1131) : warning C4101: 'count' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1130) : warning C4101: 'j' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(1237) : warning C4013: 'paintHistoryData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1400) : warning C4013: 'BuildTree' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1401) : warning C4013: 'findCategory' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1401) : warning C4047: '=' : 'struct CategoryNode *' differs in levels of indirection from 'int '
-D:\lx1\vc\1\Library\view.c(1430) : warning C4013: 'paintBookClassData' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1499) : warning C4013: 'bookIndexAfterReorder' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1538) : warning C4013: 'initShelves' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1539) : warning C4013: 'initLibraryGraph' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1541) : warning C4013: 'dijkstra' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1556) : warning C4013: 'printPath' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1582) : warning C4013: 'userIndexAfterReorder' undefined; assuming extern returning int
-D:\lx1\vc\1\Library\view.c(1574) : warning C4101: 'str' : unreferenced local variable
-D:\lx1\vc\1\Library\view.c(128) : warning C4715: 'login' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(207) : warning C4715: 'regist' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(518) : warning C4715: 'changePasswd' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(1173) : warning C4715: 'renewBook' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(1345) : warning C4715: 'book_class_and_recommend' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(1515) : warning C4715: 'book_recommend' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(1568) : warning C4715: 'navigate' : not all control paths return a value
-D:\lx1\vc\1\Library\view.c(1613) : warning C4715: 'show_digital' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(27) : warning C4013: 'paintWindow' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(28) : warning C4013: 'gotoxy' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(30) : warning C4013: 'paintButton' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(67) : warning C4013: 'getSystemTime' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(78) : warning C4013: 'getUserInput' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(91) : warning C4013: 'checkLogin' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(95) : warning C4013: 'getch' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(199) : warning C4013: 'regUser' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(136) : warning C4101: 'fp' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(483) : warning C4013: 'checkPwd' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(499) : warning C4013: 'changePwd' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(425) : warning C4101: 'i' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(532) : warning C4013: 'getAllBookCount' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(570) : warning C4013: 'dataUpdate' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(571) : warning C4013: 'initBookData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(667) : warning C4013: 'getBookClass' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(669) : warning C4013: 'quickSort' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(670) : warning C4013: 'rebuildFile' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(676) : warning C4013: 'BuildTree' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(725) : warning C4013: 'getBookIndex' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(763) : warning C4013: 'paintExcel' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(792) : warning C4013: 'checkBookInquiryInput' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(815) : warning C4013: 'paintBookData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(752) : warning C4101: 'a' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(916) : warning C4013: 'checkUserInquiryInput' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(939) : warning C4013: 'paintUserData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1021) : warning C4013: 'enqueueBorrowRequest' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1027) : warning C4013: 'dequeueBorrowRequest' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1062) : warning C4013: 'addHistoryToFile' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1063) : warning C4013: 'initHistoryData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(996) : warning C4101: 'count' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(994) : warning C4101: 'i' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(995) : warning C4101: 'j' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1126) : warning C4013: 'calculateLateFee' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1126) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+d:\lx1\vc\1\library\view.c(1088) : warning C4101: 'result' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1096) : warning C4101: 'history' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1091) : warning C4101: 'count' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1090) : warning C4101: 'j' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1190) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+d:\lx1\vc\1\library\view.c(1154) : warning C4101: 'result' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1162) : warning C4101: 'history' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1157) : warning C4101: 'count' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1156) : warning C4101: 'j' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1263) : warning C4013: 'paintHistoryData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1427) : warning C4013: 'findCategory' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1427) : warning C4047: '=' : 'struct CategoryNode *' differs in levels of indirection from 'int '
+d:\lx1\vc\1\library\view.c(1468) : warning C4013: 'paintBookClassData' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1537) : warning C4013: 'bookIndexAfterReorder' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1574) : warning C4013: 'countNodes' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1586) : warning C4013: 'addEdge' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1559) : warning C4101: 'dist' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1560) : warning C4101: 'prev' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(1616) : warning C4013: 'initLibraryGraph' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1628) : warning C4013: 'dijkstra' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1643) : warning C4013: 'printPath' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1662) : warning C4013: 'userIndexAfterReorder' undefined; assuming extern returning int
+d:\lx1\vc\1\library\view.c(1654) : warning C4101: 'str' : unreferenced local variable
+d:\lx1\vc\1\library\view.c(131) : warning C4715: 'login' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(213) : warning C4715: 'regist' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(524) : warning C4715: 'changePasswd' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(1199) : warning C4715: 'renewBook' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(1371) : warning C4715: 'book_class_and_recommend' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(1553) : warning C4715: 'book_recommend' : not all control paths return a value
+d:\lx1\vc\1\library\view.c(1693) : warning C4715: 'show_digital' : not all control paths return a value
 Linking...
 
 

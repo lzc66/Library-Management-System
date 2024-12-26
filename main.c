@@ -42,10 +42,10 @@ int main()
 				i = brBook_manage();
 				break;
 			case SHOW_WIN_NAVIGATE_ADMIN:
-				i =navigate(SHOW_WIN_NAVIGATE_ADMIN);
+				i =navigate_admin();
 				break;
 			case SHOW_WIN_NAVIGATE_NORMAL:
-				i =navigate(SHOW_WIN_NAVIGATE_NORMAL);
+				i =navigate_normal();
 				break;
             case SHOW_WIN_ADMIN_MAIN:
 				i =admin_win();
